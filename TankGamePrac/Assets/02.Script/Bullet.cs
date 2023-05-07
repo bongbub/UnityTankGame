@@ -11,7 +11,7 @@ public class Bullet : MonoBehaviour
     
     void Start()
     {
-        GetComponent<Rigidbody>().AddForce(transform.forward * power);
+        GetComponent<Rigidbody>().AddForce(transform.forward * power); //z축으로 발사
     }
    
     void Update()

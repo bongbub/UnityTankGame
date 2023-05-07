@@ -31,7 +31,7 @@ public class Enemy : MonoBehaviour
         //태그가 Target인 게임오브젝트를 찾아서 해당 오브젝트의 위치 컴포넌트를 target에 저장
         target = GameObject.FindGameObjectWithTag("Target").GetComponent<Transform>();
         moveSpeed = 1.0f;
-        power = 10;
+        power = 50;
         fTime = 0.5f;
         rotAngle = 15;
 
@@ -45,12 +45,13 @@ public class Enemy : MonoBehaviour
         //transform.LookAt(target.transform.position);
 
         //총알이 탱크쪽으로 나가는 방향을 얻어냄 (타겟포지션-enemy포지션)
-        //direction = target.transform.position - this.transform.position;
+        direction = target.transform.position - this.transform.position;
         //Vector3.Distance(Vector3 a, Vector3 b) - a와 b 사이에 거리를 측정해 반환하는 함수
         distance = Vector3.Distance(target.transform.position, this.transform.position);
         fTime += Time.deltaTime;
+        Debug.Log(direction);
 
-        if (distance < 10.0f)
+        if (distance < 15.0f)
         {
             //적 탱크 따라오게
             //this.transform.LookAt(target.transform.position);  //enemy가 target을 바라보게
@@ -58,7 +59,7 @@ public class Enemy : MonoBehaviour
             //Transform.RotateAround(Vector3 point, Vector3 axis, float angle)
             //point - 기준점 / axis - 움직이는방향(대충) / angle - 움직이는 속도
             //transform.RotateAround(Vector3.zero, Vector3.up, amtToRot);
-            //static Vector3 Lerp(Vector3 from, Vector3 to, float t);
+            //static Vector3.Lerp(Vector3 from, Vector3 to, float t);
             //from과 to의 시간에 따른 위치를 구할 때 사용
             //this.transform.position = Vector3.Lerp(transform.position, target.position, Time.deltaTime * moveSpeed / 2);
 
