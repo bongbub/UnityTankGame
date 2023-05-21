@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
     {
         //태그가 Target인 게임오브젝트를 찾아서 해당 오브젝트의 위치 컴포넌트를 target에 저장
         target = GameObject.FindGameObjectWithTag("Target").GetComponent<Transform>();
-        moveSpeed = 1.0f;
+        moveSpeed = 0.45f;
         power = 50;
         fTime = 0.5f;
         rotAngle = 15;
@@ -49,9 +49,9 @@ public class Enemy : MonoBehaviour
         //Vector3.Distance(Vector3 a, Vector3 b) - a와 b 사이에 거리를 측정해 반환하는 함수
         distance = Vector3.Distance(target.transform.position, this.transform.position);
         fTime += Time.deltaTime;
-        Debug.Log(direction);
+        //Debug.Log(direction);
 
-        if (distance < 15.0f)
+        if (distance < 20.0f)
         {
             //적 탱크 따라오게
             //this.transform.LookAt(target.transform.position);  //enemy가 target을 바라보게
@@ -66,7 +66,7 @@ public class Enemy : MonoBehaviour
             nvAgent.destination = target.position;
 
 
-            if (fTime > 0.5f)
+            if (fTime > 1.0f)
             {
                 //총알 생성 및 사운드 처리
                 GameObject obj = Instantiate(bullet) as GameObject;
