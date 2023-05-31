@@ -8,6 +8,8 @@ public class Bullet : MonoBehaviour
     public int power = 1000;  //포 발사 속도
     public AudioClip sound; //사운드 파일 저장
     public GameObject exp;   //폭발효과
+    public GameObject bigexp;  //큰폭발효과
+    public int hitcount = 0;
 
     
     void Start()
@@ -32,11 +34,13 @@ public class Bullet : MonoBehaviour
         }
         else if (col.gameObject.tag == "Enemy") 
         {
+ 
             Score.Hit++;
             Debug.Log("enemy");
             if (Score.Hit > 5)
             {
                 //enemy제거
+                //copy_bigexp.transform.position = col.transform.position;
                 //승리화면 Scene전환
                 SceneManager.LoadScene("Win");
             }
@@ -52,7 +56,24 @@ public class Bullet : MonoBehaviour
                 //SceneManager.LoadScene("Lose");
             }
         }
+        else if (col.gameObject.tag == "Zombie")
+        {
+
+            Destroy(col.gameObject);
+
+            
+        }
+        else if (col.gameObject.tag == "Rock")
+        {
+            copy_exp.transform.position = this.transform.position;
+            Destroy(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
         copy_exp.transform.position = this.transform.position;
         Destroy(gameObject);  //총알을 없앰
+        Destroy( copy_exp, 1.5f);
     }
 }
